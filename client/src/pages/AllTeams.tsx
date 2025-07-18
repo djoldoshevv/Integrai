@@ -29,8 +29,9 @@ interface User {
   lastName?: string;
   position?: string;
 }
-import onboardingImage from "@assets/Снимок экрана 2025-06-15 в 2.31.42 AM_1749933105864.png";
-import directoryImage from "@assets/Снимок экрана 2025-06-15 в 2.33.54 AM_1749933240046.png";
+// uncomment and import images later
+//import onboardingImage from "@assets/Снимок экрана 2025-06-15 в 2.31.42 AM_1749933105864.png";
+//import directoryImage from "@assets/Снимок экрана 2025-06-15 в 2.33.54 AM_1749933240046.png";
 
 export default function AllTeams() {
   const [, setLocation] = useLocation();
@@ -201,14 +202,14 @@ export default function AllTeams() {
                   <div className={`${useCase.color} h-64 p-8 relative flex items-center justify-center`}>
                     {index === 0 && (
                       <img 
-                        src={onboardingImage} 
+                        src={""}    // change to onboardingImage later
                         alt="New Hire Onboarding interface showing Employee handbook, Benefits Portal, and Payroll" 
                         className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
                       />
                     )}
                     {index === 1 && (
                       <img 
-                        src={directoryImage} 
+                        src={""}    // change to directoryImage later
                         alt="Org chart showing team member profiles with recent activity and collaboration history" 
                         className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
                       />
