@@ -25,7 +25,7 @@ import Reports from "@/pages/Reports";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={GeneratedDesign} />
+      <Route path="/" component={() => (window.location.replace('/dashboard'), null)} />
       <Route path="/product" component={Product} />
       <Route path="/product/ai-agents" component={AIAgents} />
       <Route path="/solutions" component={Solutions} />
