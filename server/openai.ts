@@ -3,6 +3,7 @@ import OpenAI from "openai";
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 let openai: OpenAI | undefined;
 
+/* Checking if OPENAI_API_KEY is set */
 if (process.env.OPENAI_API_KEY) {
   openai = new OpenAI({ 
     apiKey: process.env.OPENAI_API_KEY 
@@ -11,7 +12,7 @@ if (process.env.OPENAI_API_KEY) {
   console.warn("OPENAI_API_KEY is not set. OpenAI features will be disabled and mock data will be used.");
 }
 
-
+/* Interface for business context */
 export interface BusinessContext {
   metrics: any[];
   salesData: any[];
@@ -24,6 +25,7 @@ export interface BusinessContext {
   conversationHistory?: Array<{ role: string; content: string; timestamp: Date }>;
 }
 
+/* Function to generate business response */
 export async function generateBusinessResponse(
   userMessage: string, 
   context: BusinessContext
@@ -121,6 +123,7 @@ Always be helpful, accurate, and engaging in your responses.`;
   }
 }
 
+/* Function to analyze sentiment */
 export async function analyzeSentiment(text: string): Promise<{
   rating: number,
   confidence: number
