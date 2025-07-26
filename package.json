@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
-    "dev:server": "cross-env NODE_ENV=development tsx--env-file=server/.env.example server/index.ts",
+    "dev:server": "cross-env NODE_ENV=development nodemon --exec tsx --env-file=server/.env.example server/index.ts",
     "dev:client": "vite --force",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "cross-env NODE_ENV=production node server/index.ts",
