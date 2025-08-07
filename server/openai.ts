@@ -144,7 +144,6 @@ export async function analyzeSentiment(text: string): Promise<{
           content: text,
         },
       ],
-      response_format: { type: "json_object" },
       temperature: 0, // Zero creativity for consistent analysis
     });
 
