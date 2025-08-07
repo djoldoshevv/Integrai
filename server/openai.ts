@@ -105,18 +105,29 @@ Communication style:
 
 Always be helpful, accurate, and engaging in your responses.`;
 
-    const response = await openai.chat.completions.create({
+    // const response = await openai.chat.completions.create({
+    //   model: "gpt-4o",
+    //   messages: [
+    //     { role: "system", content: systemPrompt },
+    //     ...conversationMessages,
+    //     { role: "user", content: userMessage }
+    //   ],
+    //   temperature: 0.7, // Balanced creativity for natural conversation
+    //   max_tokens: 800, // More space for detailed responses
+    // });
+
+    const response = await openai.responses.create({
       model: "gpt-4o",
-      messages: [
+      input: [
         { role: "system", content: systemPrompt },
         ...conversationMessages,
         { role: "user", content: userMessage }
       ],
       temperature: 0.7, // Balanced creativity for natural conversation
-      max_tokens: 800, // More space for detailed responses
-    });
+      max_output_tokens: 800, // More space for detailed responses
+    })
 
-    return response.choices[0].message.content || "I'm having trouble generating a response right now. Please try again.";
+    return response.output_text || "I'm having trouble generating a response right now. Please try again.";
   } catch (error) {
     console.error("OpenAI API error:", error);
     throw new Error("Failed to generate AI response");
@@ -132,9 +143,9 @@ export async function analyzeSentiment(text: string): Promise<{
     return { rating: 3, confidence: 0.5 };
   }
   try {
-    const response = await openai.chat.completions.create({
+    const response = await openai.responses.create({
       model: "gpt-4o",
-      messages: [
+      input: [
         {
           role: "system",
           content: "You are a sentiment analysis expert. Analyze the sentiment of the text and provide a rating from 1 to 5 stars and a confidence score between 0 and 1. Respond with JSON in this format: { 'rating': number, 'confidence': number }",
@@ -144,10 +155,11 @@ export async function analyzeSentiment(text: string): Promise<{
           content: text,
         },
       ],
+      //response_format: { type: "json_object" },
       temperature: 0, // Zero creativity for consistent analysis
     });
 
-    const result = JSON.parse(response.choices[0].message.content || "{}");
+    const result = JSON.parse(response.output_text || "{}");
 
     return {
       rating: Math.max(1, Math.min(5, Math.round(result.rating || 3))),

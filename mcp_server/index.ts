@@ -8,6 +8,11 @@ const server = new McpServer({
   version: "1.0.0"
 });
 
+// test
+server.tool("test", async () => ({
+  content: [{ type: "text", text: "Hello, world!" }]
+}));
+
 // Add an addition tool
 server.registerTool("add",
   {
@@ -38,4 +43,5 @@ server.registerResource(
 
 // Start receiving messages on stdin and sending messages on stdout
 const transport = new StdioServerTransport();
-//await server.connect(transport);      <<<<<<<<<
+await server.connect(transport);      //<<<<<<<<<<<<<
+console.error("Server started");
