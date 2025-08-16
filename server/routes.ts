@@ -151,6 +151,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       };
 
       // 3. Generate a response using the OpenAI service
+      console.error("routes.ts triggered");
       const response = await generateBusinessResponse(query, context);
 
       res.json({ response });

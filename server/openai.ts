@@ -34,6 +34,8 @@ export async function generateBusinessResponse(
     return "This is a mock response from Oraclio AI. To enable real AI responses, please set the OPENAI_API_KEY environment variable.";
   }
   try {
+    console.error("Generating business response test");
+
     // Build conversation history for context
     const conversationMessages: Array<{ role: "user" | "assistant"; content: string }> = [];
     
@@ -127,6 +129,7 @@ Always be helpful, accurate, and engaging in your responses.`;
       max_output_tokens: 800, // More space for detailed responses
     })
 
+    // sending response / false response string to client
     return response.output_text || "I'm having trouble generating a response right now. Please try again.";
   } catch (error) {
     console.error("OpenAI API error:", error);
