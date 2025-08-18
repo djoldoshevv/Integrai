@@ -4,44 +4,57 @@ import { z } from "zod";
 
 // Create an MCP server
 const server = new McpServer({
-  name: "mcp-excel-server",
+  name: "mcp-server",
   version: "1.0.0"
 });
 
 // test
-server.tool("test", async () => ({
-  content: [{ type: "text", text: "Hello, world!" }]
-}));
-
-// Add an addition tool
-server.registerTool("add",
+server.tool(
+  "MyTextFile",
   {
-    title: "Addition Tool",
-    description: "Add two numbers",
-    inputSchema: { a: z.number(), b: z.number() }
+    // variable with data type error checks
   },
-  async ({ a, b }) => ({
-    content: [{ type: "text", text: String(a + b) }]
-  })
+  async () => {
+    return {
+      content: [
+        { 
+          type: "text",
+          text: "Hello, mcp world!"
+        }
+      ]
+    }
+  }
 );
 
-// Add a dynamic greeting resource
-server.registerResource(
-  "excel",
-  new ResourceTemplate("excel://{name}", { list: undefined }),
-  { 
-    title: "Excel Resource",      // Display name for UI
-    description: "Dynamic Excel generator"
-  },
-  async (uri, { name }) => ({
-    contents: [{
-      uri: uri.href,
-      text: `Excel file for ${name}`
-    }]
-  })
-);
+// // Add an addition tool
+// server.registerTool("add",
+//   {
+//     title: "Addition Tool",
+//     description: "Add two numbers",
+//     inputSchema: { a: z.number(), b: z.number() }
+//   },
+//   async ({ a, b }) => ({
+//     content: [{ type: "text", text: String(a + b) }]
+//   })
+// );
+
+// // Add a dynamic greeting resource
+// server.registerResource(
+//   "excel",
+//   new ResourceTemplate("excel://{name}", { list: undefined }),
+//   { 
+//     title: "Excel Resource",      // Display name for UI
+//     description: "Dynamic Excel generator"
+//   },
+//   async (uri, { name }) => ({
+//     contents: [{
+//       uri: uri.href,
+//       text: `Excel file for ${name}`
+//     }]
+//   })
+// );
 
 // Start receiving messages on stdin and sending messages on stdout
 const transport = new StdioServerTransport();
 await server.connect(transport);      //<<<<<<<<<<<<<
-console.error("Server started");
+console.error("MCP Server started");

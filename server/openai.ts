@@ -120,6 +120,14 @@ Always be helpful, accurate, and engaging in your responses.`;
 
     const response = await openai.responses.create({
       model: "gpt-4o",
+      tools: [
+        {
+          type: "mcp",
+          server_label: "mcp-server",
+          server_url: "C:\\Users\\SLAVKA\\Desktop\\SomWork\\Integrai\\mcp_server\\index.ts",
+          require_approval: "never"
+        }
+      ],
       input: [
         { role: "system", content: systemPrompt },
         ...conversationMessages,

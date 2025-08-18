@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\" \"npm:dev:mcp\"",
     "dev:server": "cross-env NODE_ENV=development nodemon --exec tsx --env-file=server/.env.example server/index.ts",
     "dev:client": "vite --force",
     "dev:mcp": "cross-env NODE_ENV=development nodemon --exec tsx mcp_server/index.ts",
